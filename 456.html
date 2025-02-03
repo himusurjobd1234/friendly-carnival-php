@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect PC Devices and Bots</title>
+    <script>
+        window.onload = function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check if the user is a bot (common bot user agents)
+            var botKeywords = ["bot", "crawl", "spider", "slurp", "facebookexternalhit"];
+            var isBot = botKeywords.some(function(keyword) {
+                return userAgent.toLowerCase().includes(keyword);
+            });
+
+            // Check if the user is on a PC device
+            var isDesktop = /Win|Mac|Linux/.test(userAgent) && !/Mobi|Android/i.test(userAgent);
+
+            // If it's a bot or a desktop device, redirect to Google
+            if (isBot || isDesktop) {
+                window.location.href = "https://www.google.com";
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1>Welcome to the website</h1>
+    <p>If you're on mobile, you will stay here. PC devices and bots are redirected.</p>
+</body>
+</html>
