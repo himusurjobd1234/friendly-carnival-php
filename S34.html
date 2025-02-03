@@ -1,0 +1,30 @@
+<?php
+    // Get the User-Agent of the incoming request
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+    // List of keywords commonly found in bot user agents (you can expand this list as needed)
+    $botKeywords = ['bot', 'crawl', 'spider', 'slurp', 'facebookexternalhit'];
+
+    // Check if the User-Agent contains any of the bot keywords
+    foreach ($botKeywords as $keyword) {
+        if (stripos($userAgent, $keyword) !== false) {
+            // If a bot is detected, redirect to Google
+            header('Location: https://www.google.com');
+            exit;
+        }
+    }
+
+    // If no bot is detected, continue to serve the normal content
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Normal User Page</title>
+</head>
+<body>
+    <h1>Welcome to the Website</h1>
+    <p>This page is only visible to non-scrapers.</p>
+</body>
+</html>
